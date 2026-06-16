@@ -1,0 +1,57 @@
+[project]
+name = "badminton-coach"
+version = "0.1.0"
+description = "Modular computer-vision pipeline for badminton match video analysis"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = [
+    "bgutil-ytdlp-pot-provider>=1.3.1",
+    "boxmot>=21.0.0",
+    "numpy>=1.24",
+    "opencv-python>=4.8",
+    "pydantic>=2.6",
+    "pyyaml>=6.0",
+    "secretstorage>=3.5.0",
+    "yt-dlp>=2026.6.9",
+]
+
+# Dependencies are grouped by layer/backend so a given deployment only installs
+# what it needs. Phase-1 perception backends are split out; each is optional and
+# selected via config. Heavy ML stacks (mmpose, torch) live in their own groups.
+[project.optional-dependencies]
+torch = ["torch>=2.2", "torchvision>=0.17"]
+# TrackNetV3 (third_party submodule) runtime deps beyond torch.
+shuttle = ["torch>=2.2", "parse>=1.20", "pandas>=2.0"]
+detection = ["rfdetr>=1.0", "ultralytics>=8.1"]
+pose = ["mediapipe>=0.10", "rtmlib>=0.0.13", "onnxruntime>=1.17"]
+# GPU pose: onnxruntime-gpu finds CUDA libs via core.cuda_bootstrap (torch's wheels).
+pose-gpu = ["mediapipe>=0.10", "rtmlib>=0.0.13", "onnxruntime-gpu>=1.17"]
+tracking = ["boxmot>=11.0", "lap>=0.4", "scipy>=1.11"]
+reconstruction = ["scipy>=1.11"]
+ui = ["gradio>=4.0", "pillow>=10.0"]
+# Court-keypoint model training/inference (heatmap backend uses timm MobileNetV4).
+train = ["torch>=2.2", "torchvision>=0.17", "timm>=1.0"]
+viz = ["matplotlib>=3.8", "pillow>=10.0"]
+dev = ["pytest>=8.0", "pytest-cov>=4.1", "ruff>=0.3", "mypy>=1.9"]
+
+[project.scripts]
+badminton = "badminton_coach.cli.main:main"
+badminton-console = "apps.dev_console:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["badminton_coach"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

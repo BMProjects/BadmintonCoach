@@ -1,0 +1,9 @@
+[submodule "third_party/TrackNetV3"]
+	path = third_party/TrackNetV3
+	url = https://github.com/qaz812345/TrackNetV3
+[submodule "third_party/monotrack"]
+	path = third_party/monotrack
+	url = https://github.com/jhwang7628/monotrack
+[submodule "third_party/BST"]
+	path = third_party/BST
+	url = https://github.com/Va6lue/BST-Badminton-Stroke-type-Transformer

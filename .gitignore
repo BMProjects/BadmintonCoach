@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Project artifacts (large / downloaded / generated — regenerable, not committed)
+weights/
+data/
+outputs/
+assets/
+*.pt
+*.onnx
+*.mp4
+*.avi
+*.mkv
+*.webm
+!tests/**/*.mp4
+!docs/**
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store

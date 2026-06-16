@@ -1,0 +1,52 @@
+# Same as singles.yaml but the court uses the `auto` calibrator: it runs line_fit +
+# heatmap + line_heatmap and keeps whichever best overlaps the painted white lines
+# (court_overlap_score). Most robust across broadcast / amateur / low-angle footage at
+# the cost of 3 forward passes; per-frame presence is off (calibrate once) to stay fast.
+name: singles_auto
+
+io:
+  clip_window: 8
+  stride: 1
+  max_frames: null
+
+perception:
+  filter_players_to_court: true
+  max_players: 2
+  court_margin_m: 2.0
+  court_per_frame_presence: false   # auto runs 3 backends -> too heavy to gate per frame
+
+  detector:
+    backend: yolo
+    device: cuda
+    weights: yolo26n.pt
+    threshold: 0.3
+    class_map:
+      0: player
+  shuttle_tracker:
+    backend: tracknetv3
+    device: cuda
+    weights: weights/ckpts/TrackNet_best.pt
+  pose_estimator:
+    backend: yolo_pose
+    device: cuda
+    weights: yolo26n-pose.pt
+    threshold: 0.3
+  player_tracker:
+    backend: iou
+    device: cuda
+  court_calibrator:
+    backend: auto
+    device: cuda
+    compute_camera: true
+    focal_px: null
+    line_heatmap:
+      weights: weights/court_lines_evit_b1.pt
+      world_map: weights/court_kp_official_world.json
+      decode: robust
+    line_fit:
+      min_overlap: 0.5
+  reconstructor:
+    backend: monotrack
+    device: cuda
+    enabled: true
+    fps: 25.0

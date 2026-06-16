@@ -1,0 +1,30 @@
+
+=== convnextv2_nano ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  [convnextv2_nano] ep10 loss 0.00116 | PCK@0.05 0.913 med 2.5px cov 1.00
+  [convnextv2_nano] ep20 loss 0.00044 | PCK@0.05 0.932 med 1.7px cov 1.00
+  [convnextv2_nano] ep30 loss 0.00037 | PCK@0.05 0.941 med 1.7px cov 1.00
+
+=== efficientvit_b1 ===
+  [efficientvit_b1] ep10 loss 0.00049 | PCK@0.05 0.955 med 1.8px cov 1.00
+  [efficientvit_b1] ep20 loss 0.00031 | PCK@0.05 0.955 med 1.6px cov 1.00
+  [efficientvit_b1] ep30 loss 0.00025 | PCK@0.05 0.943 med 1.6px cov 1.00
+
+=== repvit_m1 ===
+Unexpected keys (downsamp_modules.0.1.num_batches_tracked, downsamp_modules.1.1.num_batches_tracked, downsamp_modules.2.1.num_batches_tracked, final_layer.1.num_batches_tracked, downsamp_modules.0.0.bias, downsamp_modules.0.0.weight, downsamp_modules.0.1.bias, downsamp_modules.0.1.running_mean, downsamp_modules.0.1.running_var, downsamp_modules.0.1.weight, downsamp_modules.1.0.bias, downsamp_modules.1.0.weight, downsamp_modules.1.1.bias, downsamp_modules.1.1.running_mean, downsamp_modules.1.1.running_var, downsamp_modules.1.1.weight, downsamp_modules.2.0.bias, downsamp_modules.2.0.weight, downsamp_modules.2.1.bias, downsamp_modules.2.1.running_mean, downsamp_modules.2.1.running_var, downsamp_modules.2.1.weight, final_layer.0.bias, final_layer.0.weight, final_layer.1.bias, final_layer.1.running_mean, final_layer.1.running_var, final_layer.1.weight, classifier.bias, classifier.weight) found while loading pretrained weights. This may be expected if model is being adapted.
+  [repvit_m1] ep10 loss 0.00055 | PCK@0.05 0.941 med 1.7px cov 1.00
+  [repvit_m1] ep20 loss 0.00035 | PCK@0.05 0.947 med 1.6px cov 1.00
+  [repvit_m1] ep30 loss 0.00031 | PCK@0.05 0.955 med 1.6px cov 1.00
+
+=== hrnet_w18 ===
+  [hrnet_w18] ep10 loss 0.00036 | PCK@0.05 0.949 med 1.6px cov 1.00
+  [hrnet_w18] ep20 loss 0.00022 | PCK@0.05 0.941 med 1.5px cov 1.00
+  [hrnet_w18] ep30 loss 0.00016 | PCK@0.05 0.959 med 1.5px cov 1.00
+
+==============================================================================
+backbone            params_M  PCK@0.05  PCK@0.02    med_px       cov       min
+------------------------------------------------------------------------------
+convnextv2_nano        15.40      0.94      0.92      1.67      1.00      3.20
+efficientvit_b1         5.00      0.94      0.93      1.57      1.00      3.00
+repvit_m1               5.10      0.95      0.94      1.58      1.00      3.00
+hrnet_w18              11.50      0.96      0.95      1.51      1.00      5.20

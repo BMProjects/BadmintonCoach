@@ -1,0 +1,7 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  [efficientvit_b1] ep10 loss 0.00049 | PCK@0.05 0.956 med 0.8px cov 1.00
+  [efficientvit_b1] ep20 loss 0.00031 | PCK@0.05 0.949 med 0.7px cov 1.00
+  [efficientvit_b1] ep30 loss 0.00025 | PCK@0.05 0.958 med 0.5px cov 1.00
+  [efficientvit_b1] ep35 loss 0.00026 | PCK@0.05 0.956 med 0.6px cov 1.00
+  saved -> weights/court_lines_evit_b1.pt
+efficientvit_b1 {'coverage': 1.0, 'median_px': 0.5663394927978516, 'mean_px': 9.034677125804436, 'PCK@0.02': 0.946894689468947, 'PCK@0.05': 0.9558955895589559, 'params_M': 5.0}
