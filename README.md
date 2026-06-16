@@ -18,29 +18,31 @@ stroke type, trunk-line color = effort, landing point flashes momentarily)*
 
 ## Framework
 
-```mermaid
-flowchart TD
-    V[Input video] --> L1
-    subgraph L1[L1 Perception]
-      D[Detection + Pose<br/>YOLO26-pose] --> T[Player tracking<br/>iou / botsort-ReID]
-      S[Shuttle tracking<br/>TrackNetV3]
-      C[Court calibration<br/>line_heatmap / line_fit / auto]
-      C --> R3[3D reconstruction<br/>MonoTrack per-shot]
-      S --> R3
-    end
-    L1 --> L2
-    subgraph L2[L2 Events]
-      H[Hit detection<br/>trajectory] --> SC[Stroke classification<br/>BST / heuristic]
-      H --> RA[Rally state machine + tactical stats]
-    end
-    L2 --> L3
-    subgraph L3[L3 Analysis]
-      BM[Biomechanics<br/>pose2d / lift3d-MotionBERT]
-      RA --> RP[Player report]
-      BM --> RP
-    end
-    L3 --> UI[Studio frontend<br/>player + event timeline + report]
-    L0[L0 Infra: data contracts · registry/factory · config · geometry/camera/physics · video IO] -.- L1
+```text
+                              Input video
+                                   │
+  ┌────────────────────────────────▼─────────────────────────────────────┐
+  │ L1  PERCEPTION                                                         │
+  │   Detection + Pose (YOLO26-pose)  ──►  Player tracking (iou / botsort-ReID)
+  │   Court calibration (line_heatmap / line_fit / auto) ─┐               │
+  │   Shuttle tracking (TrackNetV3) ──────────────────────┴─► 3D recon    │
+  │                                                          (MonoTrack)  │
+  └────────────────────────────────┬─────────────────────────────────────┘
+                                    ▼
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ L2  EVENTS                                                             │
+  │   Hit detection (trajectory) ──►  Stroke classification (BST / heuristic)
+  │                              └──►  Rally state machine + tactical stats │
+  └────────────────────────────────┬─────────────────────────────────────┘
+                                    ▼
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │ L3  ANALYSIS                                                           │
+  │   Biomechanics (pose2d / lift3d-MotionBERT)  ──►  Player report        │
+  └────────────────────────────────┬─────────────────────────────────────┘
+                                    ▼
+              Studio frontend (player + event timeline + report)
+
+  L0  INFRA: data contracts · registry/factory · config · geometry/camera/physics · video IO
 ```
 
 **Layers**: L0 infrastructure → L1 perception → L2 events → L3 analysis → visualization /
