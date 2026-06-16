@@ -58,10 +58,14 @@ Requires Python 3.11, [uv](https://github.com/astral-sh/uv), an NVIDIA GPU (CPU 
 slower).
 
 ```bash
-git clone --recursive https://github.com/BMProjects/BadmintonCoach.git
+git clone https://github.com/BMProjects/BadmintonCoach.git
 cd BadmintonCoach
 uv sync                                    # install deps (pyproject + uv.lock)
-git submodule update --init --recursive    # TrackNetV3 / MonoTrack / BST
+
+# Vendored dependencies are NOT tracked by this repo — clone them into third_party/:
+git clone https://github.com/qaz812345/TrackNetV3                 third_party/TrackNetV3
+git clone https://github.com/jhwang7628/monotrack                third_party/monotrack
+git clone https://github.com/Va6lue/BST-Badminton-Stroke-type-Transformer third_party/BST
 ```
 
 **Weights** (none committed — see `.gitignore`):

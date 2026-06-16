@@ -29,6 +29,11 @@ assets/
 !tests/**/*.mp4
 !docs/**
 
+# Third-party dependency code (cloned locally, not tracked/synced by this repo)
+third_party/BST/
+third_party/TrackNetV3/
+third_party/monotrack/
+
 # Editor / OS
 .vscode/
 .idea/
